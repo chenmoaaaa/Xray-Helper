@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"certe.kim/xray4magisk-helper/app/xray/stats"
+	"github.com/certekim/xray4magisk-helper/app/xray/stats"
 	"github.com/julienschmidt/httprouter"
 )
 

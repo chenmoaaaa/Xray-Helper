@@ -1,25 +1,36 @@
 package stats
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 
-	"certe.kim/xray4magisk-helper/app/utils"
+	"github.com/certekim/xray4magisk-helper/app/utils"
+	"github.com/certekim/xray4magisk-helper/app/xray"
 	"github.com/julienschmidt/httprouter"
 )
 
 func StatsqueryHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	pattern := ps.ByName("pattern")
-	value := utils.Extract(pattern)
-	// log.Println(value)
-	// log.Println("xray api statsquery --server=127.0.0.1:65534 -pattern \"" + value + "\"")
-	err, out, errout := utils.Shellout("xray api statsquery --server=127.0.0.1:65534 -pattern \"" + value + "\"")
+	ret := ps.ByName("pattern")
+	data := utils.Extract(ret)
+	pattern := xray.Client.QueryStats(data, false)
+
+	sub := make(map[string]interface{})
+	for key, val := range pattern {
+		sub[key] = val
+	}
+	var stat []map[string]interface{}
+	stat = append(stat, sub)
+
+	buf := new(bytes.Buffer)
+	enc := json.NewEncoder(buf)
+	enc.SetEscapeHTML(false)
+
+	err := enc.Encode(&stat)
 	if err != nil {
-		log.Printf("error when running command: %v\n", err)
+		log.Println("failed to convert json")
 	}
-	if errout != "" {
-		log.Printf("stderr: %v\n", err)
-	}
-	fmt.Fprintf(w, "%s\n", string(out))
+	fmt.Fprintf(w, "%s", buf.String())
 }
