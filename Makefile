@@ -1,7 +1,7 @@
 all: build
 
 clean:
-	@rm -rf helper-*
+	@rm -rf ./bin/helper-*
 
 build:
 	CGO_ENABLED=0 GOOS=linux go build -o ./bin/helper-$(shell uname -m) -trimpath -ldflags "-s -w -buildid=" ./main
