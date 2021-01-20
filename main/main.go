@@ -1,14 +1,20 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"certe.kim/xray4magisk-helper/app/xray/stats"
+	"github.com/julienschmidt/httprouter"
 )
 
 func main() {
-	fs := http.FileServer(http.Dir("./static"))
-	http.Handle("/", fs)
-	http.HandleFunc("/statssys", stats.StatssysHandler)
-	http.ListenAndServe(":8080", nil)
+	router := httprouter.New()
+	router.GET("/", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		http.FileServer(http.Dir(("./static"))).ServeHTTP(w, r)
+	})
+	router.GET("/statssys", stats.StatssysHandler)
+	router.GET("/statsquery/:pattern", stats.StatsqueryHandler)
+	router.GET("/stats/:name", stats.StatsHandler)
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
