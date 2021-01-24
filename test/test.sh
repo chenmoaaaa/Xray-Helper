@@ -76,3 +76,21 @@ rmo() {
     curl \
     http://127.0.0.1:8080/rmo/proxy-test
 }
+
+case "$1" in
+  rmi)
+    rmi
+    ;;
+  rmo)
+    rmo
+    ;;
+  adi)
+    adi
+    ;;
+  ado)
+    ado
+    ;;
+  *)
+    echo "$0:  usage:  $0 {rmi|rmo|adi|ado}"
+    ;;
+esac
