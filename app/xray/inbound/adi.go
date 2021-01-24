@@ -1,32 +1,18 @@
 package inbound
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 
+	"github.com/certekim/xray4magisk-helper/app/utils"
 	"github.com/certekim/xray4magisk-helper/app/xray"
 	"github.com/julienschmidt/httprouter"
 )
 
 //"Content-Type: application/json"
 func AddInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	err := r.ParseForm()
+	res, err := utils.Convert(r)
 	if err != nil {
-		log.Println("AddInboundHandler: ParseForm")
-		log.Println(err)
-		return
-	}
-	decoder := json.NewDecoder(r.Body)
-	var params map[string]interface{}
-	if err := decoder.Decode(&params); err != nil {
-		log.Println("AddInboundHandler: jsonDecode")
-		log.Println(err)
-		return
-	}
-	res, err := json.Marshal(params)
-	if err != nil {
-		log.Println("AddInboundHandler: jsonMarshal")
 		log.Println(err)
 		return
 	}

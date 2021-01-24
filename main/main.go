@@ -4,9 +4,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/certekim/xray4magisk-helper/app/xray/inbound"
-	"github.com/certekim/xray4magisk-helper/app/xray/outbound"
-	"github.com/certekim/xray4magisk-helper/app/xray/stats"
+	hin "github.com/certekim/xray4magisk-helper/app/helper/inbound"
+	xin "github.com/certekim/xray4magisk-helper/app/xray/inbound"
+	xout "github.com/certekim/xray4magisk-helper/app/xray/outbound"
+	xstat "github.com/certekim/xray4magisk-helper/app/xray/stats"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -15,12 +16,13 @@ func main() {
 	router.GET("/", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		http.FileServer(http.Dir(("./static"))).ServeHTTP(w, r)
 	})
-	router.GET("/statssys", stats.StatssysHandler)
-	router.GET("/statsquery/:pattern", stats.StatsqueryHandler)
-	router.GET("/stats/:name", stats.StatsHandler)
-	router.GET("/rmi/:tag", inbound.RemoveInboundHandler)
-	router.GET("/rmo/:tag", outbound.RemoveOutboundHandler)
-	router.POST("/adi", inbound.AddInboundHandler)
-	router.POST("/ado", outbound.AddOutboundHandler)
+	router.GET("/xray/statssys", xstat.StatssysHandler)
+	router.GET("/xray/statsquery/:pattern", xstat.StatsqueryHandler)
+	router.GET("/xray/stats/:name", xstat.StatsHandler)
+	router.GET("/xray/inbound/remove/:tag", xin.RemoveInboundHandler)
+	router.POST("/xray/inbound/add", xin.AddInboundHandler)
+	router.GET("/xray/outbound/remove/:tag", xout.RemoveOutboundHandler)
+	router.POST("/xray/outbound/add", xout.AddOutboundHandler)
+	router.POST("/helper/inbound/add", hin.WriteInboundHandler)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
