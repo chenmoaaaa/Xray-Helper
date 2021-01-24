@@ -6,8 +6,10 @@ import (
 	"github.com/certekim/xctl"
 )
 
-var Client = xctl.NewServiceClient("127.0.0.1", 65534)
+const port = 65534
+
+var Client = xctl.NewServiceClient("127.0.0.1", port)
 
 func init() {
-	log.Println("connecting to xray")
+	log.Println("rpc Client created")
 }
