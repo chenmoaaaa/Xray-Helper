@@ -1,17 +1,16 @@
 package outbound
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 
-	"github.com/certekim/xray4magisk-helper/app/utils"
 	"github.com/certekim/xray4magisk-helper/app/xray"
 	"github.com/julienschmidt/httprouter"
 )
 
 func RemoveOutboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	ret := ps.ByName("tag")
-	data := utils.Extract(ret)
+	data := ps.ByName("tag")
+	log.Println(data)
 	xray.Client.RemoveOutbound(data)
-	fmt.Fprintf(w, "Success")
+	// fmt.Fprintf(w, "Success")
 }

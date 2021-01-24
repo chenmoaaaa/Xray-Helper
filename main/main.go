@@ -21,5 +21,6 @@ func main() {
 	router.GET("/rmi/:tag", inbound.RemoveInboundHandler)
 	router.GET("/rmo/:tag", outbound.RemoveOutboundHandler)
 	router.POST("/adi", inbound.AddInboundHandler)
+	router.POST("/ado", outbound.AddOutboundHandler)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
