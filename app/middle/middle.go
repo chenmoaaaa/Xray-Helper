@@ -3,18 +3,18 @@ package middle
 import (
 	"log"
 
+	"github.com/certekim/xray4magisk-helper/app/config"
 	scribble "github.com/nanobox-io/golang-scribble"
 )
 
 var JsonDB *scribble.Driver
 
-const dir = "/data/xray/helper/data"
-
-func Init() {
+func init() {
 	var err error
-	JsonDB, err = scribble.New(dir, nil)
+	path := config.Conf["data"].(string)
+	JsonDB, err = scribble.New(path, nil)
 	if err != nil {
 		log.Println("Error", err)
 	}
-	log.Println("storage pool connected")
+	log.Println("storage pool connected : " + path)
 }

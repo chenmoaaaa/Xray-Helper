@@ -13,6 +13,7 @@ import (
 
 func StatsqueryHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	data := ps.ByName("pattern")
+	log.Println("statsquery : " + data)
 	pattern := xray.Client.QueryStats(data, false)
 
 	sub := make(map[string]interface{})

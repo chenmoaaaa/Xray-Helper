@@ -1,6 +1,25 @@
 #!/bin/bash
 
-ado() {
+hwi() {
+    curl \
+    --header "Content-Type: application/json" \
+    --data '
+    {
+        "tag": "http-test",
+        "port": 2080,
+        "protocol": "http",
+        "settings": {}
+    }
+    ' \
+    http://127.0.0.1:8080/helper/inbound/add
+}
+
+hri() {
+    curl \
+    http://127.0.0.1:8080/helper/inbound/read/http-test
+}
+
+xao() {
     curl \
     --header "Content-Type: application/json" \
     --data '
@@ -50,10 +69,10 @@ ado() {
         }
     }
     ' \
-    http://127.0.0.1:8080/ado
+    http://127.0.0.1:8080/xray/outbound/add
 }
 
-adi() {
+xai() {
     curl \
     --header "Content-Type: application/json" \
     --data '
@@ -64,33 +83,39 @@ adi() {
         "settings": {}
     }
     ' \
-    http://127.0.0.1:8080/adi
+    http://127.0.0.1:8080/xray/inbound/add
 }
 
-rmi() {
+xri() {
     curl \
-    http://127.0.0.1:8080/rmi/http-test
+    http://127.0.0.1:8080/xray/inbound/remove/http-test
 }
 
-rmo() {
+xro() {
     curl \
-    http://127.0.0.1:8080/rmo/proxy-test
+    http://127.0.0.1:8080/xray/outbound/remove/proxy-test
 }
 
 case "$1" in
-  rmi)
-    rmi
-    ;;
-  rmo)
-    rmo
-    ;;
-  adi)
-    adi
-    ;;
-  ado)
-    ado
-    ;;
-  *)
-    echo "$0:  usage:  $0 {rmi|rmo|adi|ado}"
-    ;;
+    hwi)
+        hwi
+        ;;
+    hri)
+        hri
+        ;;
+    xri)
+        xri
+        ;;
+    xro)
+        xro
+        ;;
+    xai)
+        xai
+        ;;
+    xao)
+        xao
+        ;;
+    *)
+        echo "$0:  usage:  $0 {xri|xro|xai|xao}"
+        ;;
 esac

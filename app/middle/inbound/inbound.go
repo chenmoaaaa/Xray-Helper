@@ -10,7 +10,11 @@ import (
 )
 
 var InboundObj *conf.InboundDetourConfig
+
+// var InboundObj map[string]interface{}
 var InboundObjs []*conf.InboundDetourConfig
+
+//var InboundObjs []map[string]interface{}
 
 func ReadAll() []byte {
 	records, err := middle.JsonDB.ReadAll("fish")
@@ -30,7 +34,7 @@ func ReadAll() []byte {
 	return ret
 }
 
-func Write(tag string, in []byte) {
+func Write(tag string, in *conf.InboundDetourConfig) {
 	if err := middle.JsonDB.Write("Inbound", tag, in); err != nil {
 		log.Println("Error", err)
 	}

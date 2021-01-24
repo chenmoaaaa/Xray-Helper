@@ -10,7 +10,7 @@ import (
 )
 
 func AddOutboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	res, err := utils.Convert(r)
+	res, err, _ := utils.Convert(r)
 	if err != nil {
 		log.Println(err)
 		return

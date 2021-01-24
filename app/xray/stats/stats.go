@@ -11,6 +11,7 @@ import (
 
 func StatsHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	data := ps.ByName("name")
+	log.Println("stats : " + data)
 	_, value := xray.Client.GetStats(data, false)
 	fmt.Fprintf(w, "%s\n", fmt.Sprintf("%v", value))
 	log.Println(value)

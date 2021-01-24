@@ -3,7 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
+	"strconv"
 
+	"github.com/certekim/xray4magisk-helper/app/config"
 	hin "github.com/certekim/xray4magisk-helper/app/helper/inbound"
 	xin "github.com/certekim/xray4magisk-helper/app/xray/inbound"
 	xout "github.com/certekim/xray4magisk-helper/app/xray/outbound"
@@ -24,5 +26,11 @@ func main() {
 	router.GET("/xray/outbound/remove/:tag", xout.RemoveOutboundHandler)
 	router.POST("/xray/outbound/add", xout.AddOutboundHandler)
 	router.POST("/helper/inbound/add", hin.WriteInboundHandler)
-	log.Fatal(http.ListenAndServe(":8080", router))
+	router.GET("/helper/inbound/read/:tag", hin.ReadInboundHandler)
+	port := strconv.FormatFloat(config.Conf["port"].(float64), 'f', 0, 64)
+	log.Fatal(http.ListenAndServe(":"+port, router))
+}
+
+func init() {
+	log.Println("Started Xray-helper")
 }

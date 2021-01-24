@@ -10,7 +10,7 @@ import (
 )
 
 func WriteOutboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	res, err, params := utils.Convert2(r)
+	res, err, params := utils.Convert(r)
 	if err != nil {
 		log.Println(err)
 		return

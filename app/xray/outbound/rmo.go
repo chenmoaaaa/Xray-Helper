@@ -10,7 +10,7 @@ import (
 
 func RemoveOutboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	data := ps.ByName("tag")
-	log.Println(data)
+	log.Println("remove outbound : " + data)
 	xray.Client.RemoveOutbound(data)
 	// fmt.Fprintf(w, "Success")
 }

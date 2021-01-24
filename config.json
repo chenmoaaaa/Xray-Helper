@@ -1,0 +1,5 @@
+{
+    "port": 8080,
+    "xray": 65534,
+    "data": "/data/xray/helper/data"
+}

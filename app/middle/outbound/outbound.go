@@ -30,7 +30,7 @@ func ReadAll() []byte {
 	return ret
 }
 
-func Write(tag string, in []byte) {
+func Write(tag string, in *conf.OutboundDetourConfig) {
 	if err := middle.JsonDB.Write("Outbound", tag, in); err != nil {
 		log.Println("Error", err)
 	}
