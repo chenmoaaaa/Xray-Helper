@@ -31,6 +31,7 @@ func StatsqueryHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Par
 	err := enc.Encode(&stat)
 	if err != nil {
 		log.Println("failed to convert json")
+		return
 	}
 	fmt.Fprintf(w, "%s", buf.String())
 }
