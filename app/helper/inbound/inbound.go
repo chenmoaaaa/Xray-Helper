@@ -8,8 +8,8 @@ import (
 
 	"github.com/certekim/xray4magisk-helper/app/middle/inbound"
 	"github.com/certekim/xray4magisk-helper/app/utils"
+	"github.com/certekim/xray4magisk-helper/app/xray"
 	"github.com/julienschmidt/httprouter"
-	"github.com/xtls/xray-core/infra/conf"
 )
 
 func WriteInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -18,7 +18,7 @@ func WriteInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.P
 		log.Println(err)
 		return
 	}
-	var ret *conf.InboundDetourConfig
+	var ret map[string]interface{}
 	err = json.Unmarshal(res, &ret)
 	if err != nil {
 		log.Println(err)
@@ -35,7 +35,7 @@ func WriteInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.P
 
 func ReadInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	tag := ps.ByName("tag")
-	var data *conf.InboundDetourConfig
+	var data map[string]interface{}
 	err := json.Unmarshal(inbound.Read(tag), &data)
 	if err != nil {
 		log.Println(err)
@@ -47,4 +47,20 @@ func ReadInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 		return
 	}
 	fmt.Fprintf(w, "%s", res)
+}
+
+func ApplyInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	tag := ps.ByName("tag")
+	var data map[string]interface{}
+	err := json.Unmarshal(inbound.Read(tag), &data)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	res, err := json.Marshal(data)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	xray.Client.AddInbound(res)
 }

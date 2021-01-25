@@ -19,6 +19,11 @@ hri() {
     http://127.0.0.1:8080/helper/inbound/read/http-test
 }
 
+hai() {
+    curl \
+    http://127.0.0.1:8080/helper/inbound/apply/http-test
+}
+
 xao() {
     curl \
     --header "Content-Type: application/json" \
@@ -103,6 +108,9 @@ case "$1" in
     hri)
         hri
         ;;
+    hai)
+        hai
+        ;;
     xri)
         xri
         ;;
@@ -116,6 +124,6 @@ case "$1" in
         xao
         ;;
     *)
-        echo "$0:  usage:  $0 {xri|xro|xai|xao}"
+        echo "$0:  usage:  $0 {hwi|hri|hai|hwo|hro|hao|xri|xro|xai|xao}"
         ;;
 esac

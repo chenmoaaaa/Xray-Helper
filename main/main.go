@@ -19,6 +19,7 @@ func main() {
 		http.FileServer(http.Dir(("./static"))).ServeHTTP(w, r)
 	})
 	router.GET("/xray/statssys", xstat.StatssysHandler)
+	router.GET("/xray/statsquery", xstat.StatsqueryHandler)
 	router.GET("/xray/statsquery/:pattern", xstat.StatsqueryHandler)
 	router.GET("/xray/stats/:name", xstat.StatsHandler)
 	router.GET("/xray/inbound/remove/:tag", xin.RemoveInboundHandler)
@@ -27,6 +28,7 @@ func main() {
 	router.POST("/xray/outbound/add", xout.AddOutboundHandler)
 	router.POST("/helper/inbound/add", hin.WriteInboundHandler)
 	router.GET("/helper/inbound/read/:tag", hin.ReadInboundHandler)
+	router.GET("/helper/inbound/apply/:tag", hin.ApplyInboundHandler)
 	port := strconv.FormatFloat(config.Conf["port"].(float64), 'f', 0, 64)
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }

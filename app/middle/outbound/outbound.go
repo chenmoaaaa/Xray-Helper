@@ -6,11 +6,10 @@ import (
 
 	"github.com/certekim/xray4magisk-helper/app/middle"
 	"github.com/certekim/xray4magisk-helper/app/xray"
-	"github.com/xtls/xray-core/infra/conf"
 )
 
-var OutboundObj *conf.OutboundDetourConfig
-var OutboundObjs []*conf.OutboundDetourConfig
+var OutboundObj map[string]interface{}
+var OutboundObjs []map[string]interface{}
 
 func ReadAll() []byte {
 	records, err := middle.JsonDB.ReadAll("fish")
@@ -30,7 +29,7 @@ func ReadAll() []byte {
 	return ret
 }
 
-func Write(tag string, in *conf.OutboundDetourConfig) {
+func Write(tag string, in map[string]interface{}) {
 	if err := middle.JsonDB.Write("Outbound", tag, in); err != nil {
 		log.Println("Error", err)
 	}
