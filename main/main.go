@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/certekim/xray4magisk-helper/app/config"
@@ -16,9 +17,19 @@ import (
 
 func main() {
 	router := httprouter.New()
-	router.GET("/", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-		http.FileServer(http.Dir(("./static"))).ServeHTTP(w, r)
-	})
+	dir := config.Conf["dir"].(string)
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		log.Println("Specific folder not found : " + dir)
+		log.Println("Serve static website on : ./static")
+		router.GET("/", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+			http.FileServer(http.Dir("./static")).ServeHTTP(w, r)
+		})
+	} else {
+		log.Println("Server static website on : " + dir)
+		router.GET("/", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+			http.FileServer(http.Dir(dir)).ServeHTTP(w, r)
+		})
+	}
 	router.GET("/xray/statssys", xstat.StatssysHandler)
 	router.GET("/xray/statsquery", xstat.StatsqueryHandler)
 	router.GET("/xray/statsquery/:pattern", xstat.StatsqueryHandler)
