@@ -41,12 +41,17 @@ func ReadInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 		log.Println(err)
 		return
 	}
-	res, err := json.Marshal(data)
-	if err != nil {
+	if res, err := json.Marshal(data); err != nil {
 		log.Println(err)
 		return
+	} else {
+		fmt.Fprintf(w, "%s", res)
 	}
-	fmt.Fprintf(w, "%s", res)
+}
+
+func DeleteInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	tag := ps.ByName("tag")
+	inbound.Del(tag)
 }
 
 func ApplyInboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

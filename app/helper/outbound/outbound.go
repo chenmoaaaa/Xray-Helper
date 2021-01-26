@@ -41,12 +41,17 @@ func ReadOutboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.P
 		log.Println(err)
 		return
 	}
-	res, err := json.Marshal(data)
-	if err != nil {
+	if res, err := json.Marshal(data); err != nil {
 		log.Println(err)
 		return
+	} else {
+		fmt.Fprintf(w, "%s", res)
 	}
-	fmt.Fprintf(w, "%s", res)
+}
+
+func DeleteOutboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	tag := ps.ByName("tag")
+	outbound.Del(tag)
 }
 
 func ApplyOutboundHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

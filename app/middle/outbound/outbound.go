@@ -8,11 +8,14 @@ import (
 	"github.com/certekim/xray4magisk-helper/app/xray"
 )
 
-var OutboundObj map[string]interface{}
-var OutboundObjs []map[string]interface{}
+type OutboundObj map[string]interface{}
+
+type OutboundObjs []OutboundObj
 
 func ReadAll() []byte {
-	records, err := middle.JsonDB.ReadAll("fish")
+	var OutboundObj OutboundObj
+	var OutboundObjs OutboundObjs
+	records, err := middle.JsonDB.ReadAll("Outbound")
 	if err != nil {
 		log.Println("Error", err)
 	}
@@ -22,11 +25,12 @@ func ReadAll() []byte {
 		}
 		OutboundObjs = append(OutboundObjs, OutboundObj)
 	}
-	ret, err := json.Marshal(OutboundObjs)
-	if err != nil {
+	if ret, err := json.Marshal(OutboundObjs); err != nil {
 		log.Println("Error", err)
+	} else {
+		return ret
 	}
-	return ret
+	return nil
 }
 
 func Write(tag string, in map[string]interface{}) {
@@ -36,14 +40,16 @@ func Write(tag string, in map[string]interface{}) {
 }
 
 func Read(tag string) []byte {
+	var OutboundObj OutboundObj
 	if err := middle.JsonDB.Read("Outbound", tag, &OutboundObj); err != nil {
 		log.Println("Error", err)
 	}
-	ret, err := json.Marshal(OutboundObj)
-	if err != nil {
+	if ret, err := json.Marshal(OutboundObj); err != nil {
 		log.Println("Error", err)
+	} else {
+		return ret
 	}
-	return ret
+	return nil
 }
 
 func Del(tag string) {
