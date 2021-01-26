@@ -14,7 +14,9 @@ func init() {
 	path := config.Conf["data"].(string)
 	JsonDB, err = scribble.New(path, nil)
 	if err != nil {
-		log.Println("Error", err)
+		log.Println("storsge pool :")
+		log.Println("	Error : ", err)
+	} else {
+		log.Println("storage pool connected : " + path)
 	}
-	log.Println("storage pool connected : " + path)
 }
