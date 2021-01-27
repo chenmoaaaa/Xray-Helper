@@ -6,12 +6,12 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/certekim/xray4magisk-helper/app/config"
-	hin "github.com/certekim/xray4magisk-helper/app/helper/inbound"
-	hout "github.com/certekim/xray4magisk-helper/app/helper/outbound"
-	xin "github.com/certekim/xray4magisk-helper/app/xray/inbound"
-	xout "github.com/certekim/xray4magisk-helper/app/xray/outbound"
-	xstat "github.com/certekim/xray4magisk-helper/app/xray/stats"
+	"github.com/certekim/xray-helper/app/config"
+	hin "github.com/certekim/xray-helper/app/helper/inbound"
+	hout "github.com/certekim/xray-helper/app/helper/outbound"
+	xin "github.com/certekim/xray-helper/app/xray/inbound"
+	xout "github.com/certekim/xray-helper/app/xray/outbound"
+	xstat "github.com/certekim/xray-helper/app/xray/stats"
 	"github.com/julienschmidt/httprouter"
 )
 

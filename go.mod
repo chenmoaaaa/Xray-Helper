@@ -1,4 +1,4 @@
-module github.com/certekim/xray4magisk-helper
+module github.com/certekim/xray-helper
 
 go 1.15
 

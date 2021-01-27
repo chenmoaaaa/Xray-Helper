@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/certekim/xray4magisk-helper/app/middle"
-	"github.com/certekim/xray4magisk-helper/app/xray"
+	"github.com/certekim/xray-helper/app/middle"
+	"github.com/certekim/xray-helper/app/xray"
 )
 
 type InboundObj map[string]interface{}

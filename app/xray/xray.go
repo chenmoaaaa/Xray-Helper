@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/certekim/xctl"
-	"github.com/certekim/xray4magisk-helper/app/config"
+	"github.com/certekim/xray-helper/app/config"
 )
 
 var Client *xctl.ServiceClient

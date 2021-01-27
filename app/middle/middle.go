@@ -3,7 +3,7 @@ package middle
 import (
 	"log"
 
-	"github.com/certekim/xray4magisk-helper/app/config"
+	"github.com/certekim/xray-helper/app/config"
 	scribble "github.com/nanobox-io/golang-scribble"
 )
 

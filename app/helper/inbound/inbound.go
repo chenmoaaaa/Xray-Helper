@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/certekim/xray4magisk-helper/app/middle/inbound"
-	"github.com/certekim/xray4magisk-helper/app/utils"
-	"github.com/certekim/xray4magisk-helper/app/xray"
+	"github.com/certekim/xray-helper/app/middle/inbound"
+	"github.com/certekim/xray-helper/app/utils"
+	"github.com/certekim/xray-helper/app/xray"
 	"github.com/julienschmidt/httprouter"
 )
 
