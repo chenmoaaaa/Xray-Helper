@@ -50,7 +50,7 @@ xao() {
         }
     }
     ' \
-    http://127.0.0.1:8080/xray/outbound/add
+    http://127.0.0.1:8080/api/xray/outbound/add
 }
 
 xai() {
@@ -64,17 +64,17 @@ xai() {
         "settings": {}
     }
     ' \
-    http://127.0.0.1:8080/xray/inbound/add
+    http://127.0.0.1:8080/api/xray/inbound/add
 }
 
 xri() {
     curl \
-    http://127.0.0.1:8080/xray/inbound/remove/http-test
+    http://127.0.0.1:8080/api/xray/inbound/remove/http-test
 }
 
 xro() {
     curl \
-    http://127.0.0.1:8080/xray/outbound/remove/proxy-test
+    http://127.0.0.1:8080/api/xray/outbound/remove/proxy-test
 }
 
 case "$1" in

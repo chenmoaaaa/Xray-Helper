@@ -11,22 +11,22 @@ hwi() {
         "settings": {}
     }
     ' \
-    http://127.0.0.1:8080/helper/inbound/add
+    http://127.0.0.1:8080/api/helper/inbound/add
 }
 
 hri() {
     curl \
-    http://127.0.0.1:8080/helper/inbound/read/http-test
+    http://127.0.0.1:8080/api/helper/inbound/read/http-test
 }
 
 hdi() {
     curl \
-    http://127.0.0.1:8080/helper/inbound/delete/http-test
+    http://127.0.0.1:8080/api/helper/inbound/delete/http-test
 }
 
 hai() {
     curl \
-    http://127.0.0.1:8080/helper/inbound/apply/http-test
+    http://127.0.0.1:8080/api/helper/inbound/apply/http-test
 }
 
 
