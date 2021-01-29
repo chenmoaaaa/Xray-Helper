@@ -5,14 +5,14 @@ statssys() {
     http://127.0.0.1:8080/api/xray/statssys
 }
 
-query() {
+statsquery() {
     curl \
-    http://127.0.0.1:8080/api/xray/statsquery/
+    http://127.0.0.1:8080/api/xray/statsquery
 }
 
 stats() {
     curl \
-    http://127.0.0.1:8080/api/xray/stats/
+    'http://127.0.0.1:8080/api/xray/stats/outbound>>>proxy>>>traffic>>>uplink'
 }
 
 case "$1" in
