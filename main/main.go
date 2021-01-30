@@ -32,6 +32,7 @@ func main() {
 		})
 		router.ServeFiles("/helper/*filepath", http.Dir(dir))
 	}
+	//xray
 	router.GET("/api/xray/statssys", xstat.StatssysHandler)
 	router.GET("/api/xray/statsquery", xstat.StatsqueryHandler)
 	router.GET("/api/xray/statsquery/:pattern", xstat.StatsqueryHandler)
@@ -40,6 +41,7 @@ func main() {
 	router.POST("/api/xray/inbound/add", xin.AddInboundHandler)
 	router.GET("/api/xray/outbound/remove/:tag", xout.RemoveOutboundHandler)
 	router.POST("/api/xray/outbound/add", xout.AddOutboundHandler)
+	//helper
 	router.POST("/api/helper/inbound/add", hin.WriteInboundHandler)
 	router.GET("/api/helper/inbound/read/:tag", hin.ReadInboundHandler)
 	router.GET("/api/helper/inbound/delete/:tag", hin.DeleteInboundHandler)
@@ -48,6 +50,13 @@ func main() {
 	router.GET("/api/helper/outbound/read/:tag", hout.ReadOutboundHandler)
 	router.GET("/api/helper/outbound/delete/:tag", hout.DeleteOutboundHandler)
 	router.GET("/api/helper/outbound/apply/:tag", hout.ApplyOutboundHandler)
+	//module
+	/*
+		router.GET("/api/module/appid/read", appid.ReadHandler)
+		router.POST("/api/module/appid/write", appid.WriteHandler)
+		router.GET("/api/module/appid/apply", appid.ApplyHandler)
+		router.GET("/api/module/appid/query", appid.QueryHandler)
+	*/
 	port := strconv.FormatFloat(config.Conf["port"].(float64), 'f', 0, 64)
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
