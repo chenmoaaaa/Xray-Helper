@@ -20,11 +20,11 @@ func main() {
 	dir := config.Conf["dir"].(string)
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		log.Println("Specific folder not found : " + dir)
-		log.Println("Serve static website on : ./static")
+		log.Println("Serve static website on : ./xray-webui")
 		router.GET("/", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-			http.ServeFile(w, r, "static/index.html")
+			http.ServeFile(w, r, "xray-webui/index.html")
 		})
-		router.ServeFiles("/helper/*filepath", http.Dir("static"))
+		router.ServeFiles("/helper/*filepath", http.Dir("xray-webui"))
 	} else {
 		log.Println("Server static website on : " + dir)
 		router.GET("/", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

@@ -2,5 +2,5 @@
     "port": 8080,
     "xray": 65534,
     "data": "/data/xray/helper/data",
-    "dir": "/data/xray/helper/static"
+    "dir": "/data/xray/helper/xray-webui"
 }
